@@ -1,0 +1,210 @@
+{
+  "info": {
+    "name": "SC Archives Online Records Index",
+    "description": "South Carolina Department of Archives and History - Online Records Index (CollectiveAccess / Pawtucket). Public IIIF Presentation 3 manifests and IIIF Image 2 (level 2) for every indexed item; search and detail pages are HTML. No key.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "IIIF (JSON, live-tested 2026-11-25)",
+      "item": [
+        {
+          "name": "IIIF manifest for an item",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.archivesindex.sc.gov/service.php/IIIF/manifest/ca_objects:{{object_id}}",
+              "protocol": "https",
+              "host": [
+                "www",
+                "archivesindex",
+                "sc",
+                "gov"
+              ],
+              "path": [
+                "service.php",
+                "IIIF",
+                "manifest",
+                "ca_objects:{{object_id}}"
+              ]
+            },
+            "description": "IIIF Presentation 3 manifest: label (e.g. \"Mccormick, Samuel Of Richland District, Will Typescript\"), metadata (Creator = names in the record), canvases with image services. object_id is the numeric id from a Detail page."
+          }
+        },
+        {
+          "name": "IIIF image info.json",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.archivesindex.sc.gov/service.php/IIIF/{{representation}}/info.json",
+              "protocol": "https",
+              "host": [
+                "www",
+                "archivesindex",
+                "sc",
+                "gov"
+              ],
+              "path": [
+                "service.php",
+                "IIIF",
+                "{{representation}}",
+                "info.json"
+              ]
+            },
+            "description": "IIIF Image API 2 (level 2) info for an image, e.g. representation = representation:75684:1 (from the manifest)."
+          }
+        },
+        {
+          "name": "IIIF image - full size",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.archivesindex.sc.gov/service.php/IIIF/{{representation}}/full/max/0/default.jpg",
+              "protocol": "https",
+              "host": [
+                "www",
+                "archivesindex",
+                "sc",
+                "gov"
+              ],
+              "path": [
+                "service.php",
+                "IIIF",
+                "{{representation}}",
+                "full",
+                "max",
+                "0",
+                "default.jpg"
+              ]
+            },
+            "description": "Full image. Use region/size per IIIF Image 2 (e.g. full/1500,/0/default.jpg)."
+          }
+        }
+      ],
+      "description": "Machine-readable item data and images."
+    },
+    {
+      "name": "Website pages (HTML)",
+      "item": [
+        {
+          "name": "Search records (HTML)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.archivesindex.sc.gov/index.php/Search/objects?search={{query}}",
+              "protocol": "https",
+              "host": [
+                "www",
+                "archivesindex",
+                "sc",
+                "gov"
+              ],
+              "path": [
+                "index.php",
+                "Search",
+                "objects"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "{{query}}"
+                }
+              ]
+            },
+            "description": "Keyword search, e.g. \"Stuart Edward\". Returns an HTML page; object ids are in links /index.php/Detail/objects/{id}. Very slow on large result sets."
+          }
+        },
+        {
+          "name": "Record detail page (HTML)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.archivesindex.sc.gov/index.php/Detail/objects/{{object_id}}",
+              "protocol": "https",
+              "host": [
+                "www",
+                "archivesindex",
+                "sc",
+                "gov"
+              ],
+              "path": [
+                "index.php",
+                "Detail",
+                "objects",
+                "{{object_id}}"
+              ]
+            },
+            "description": "Full index entry for one record (series, date, names, places, image)."
+          }
+        },
+        {
+          "name": "Advanced search form (HTML)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.archivesindex.sc.gov/index.php/Search/advanced/objects",
+              "protocol": "https",
+              "host": [
+                "www",
+                "archivesindex",
+                "sc",
+                "gov"
+              ],
+              "path": [
+                "index.php",
+                "Search",
+                "advanced",
+                "objects"
+              ]
+            },
+            "description": "Fields: names (ca_entities), places, series, document type, date, topics."
+          }
+        },
+        {
+          "name": "Collections list (HTML)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://www.archivesindex.sc.gov/index.php/Collections/index",
+              "protocol": "https",
+              "host": [
+                "www",
+                "archivesindex",
+                "sc",
+                "gov"
+              ],
+              "path": [
+                "index.php",
+                "Collections",
+                "index"
+              ]
+            },
+            "description": "Series indexed: plats, land grants, wills, estate papers, petitions, Revolutionary War accounts audited, etc."
+          }
+        }
+      ],
+      "description": "Search and record pages - HTML only, slow (searches can take 1-2 minutes)."
+    }
+  ],
+  "variable": [
+    {
+      "key": "object_id",
+      "value": "1"
+    },
+    {
+      "key": "representation",
+      "value": "representation:75684:1"
+    },
+    {
+      "key": "query",
+      "value": "Stuart Edward"
+    }
+  ]
+}
